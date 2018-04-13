@@ -1,0 +1,15 @@
+{
+  "name": "numscroll",
+  "version": "0.0.1",
+  "description": "A small utility class for animating through numbers.",
+  "repository": "https://github.com/pimdewit/numscroll",
+  "main": "index.js",
+  "scripts": {
+    "docs": "jsdoc ./src -d docs"
+  },
+  "author": "Pim de Wit",
+  "license": "MIT",
+  "devDependencies": {
+    "jsdoc": "^3.5.5"
+  }
+}
