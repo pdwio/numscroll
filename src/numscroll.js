@@ -1,3 +1,26 @@
+
+/**
+ * Constants related to NumsScroll in particular. in order to prevent magic
+ *
+ * @memberOf {NumScroll}
+ * @since 0.0.2
+ * @public
+ * @constant
+ * @readonly
+ *
+ * @returns {object}
+ */
+const CONSTANTS = {
+  CSS_CLASS: {
+    GROUP: 'numscroll__number-group',
+    NUMBER: 'numscroll__number',
+    ACTIVE: 'numscroll__number--next',
+    PREVIOUS: 'numscroll__number--previous',
+    NEXT: 'numscroll__number--next',
+  },
+};
+
+
 /**
  * @author Pim de Wit <https://pdw.io>
  * @license {@link https://github.com/pimdewit/pdw.numscroll/blob/master/LICENSE|MIT License}
@@ -6,29 +29,6 @@
  * @classdesc A small utility class for animating through numbers.
  */
 class NumScroll {
-  /**
-   * Constants related to this class in order to prevent magic
-   *
-   * @memberOf {NumScroll}
-   * @since 0.0.1
-   * @public
-   * @static
-   * @readonly
-   *
-   * @returns {object}
-   */
-  static CONSTANTS() {
-    return {
-      CSS_CLASS: {
-        GROUP: 'numscroll__number-group',
-        NUMBER: 'numscroll__number',
-        ACTIVE: 'numscroll__number--next',
-        PREVIOUS: 'numscroll__number--previous',
-        NEXT: 'numscroll__number--next',
-      },
-    }
-  }
-
   /**
    * Transform (CSS) an element.
    *
@@ -55,12 +55,12 @@ class NumScroll {
    */
   static createNumberGroupDOM() {
     const element = document.createElement('div');
-    element.classList.add(NumScroll.CONSTANTS().CSS_CLASS.GROUP);
+    element.classList.add(CONSTANTS.CSS_CLASS.GROUP);
 
     let numberIterator = 0;
     for (numberIterator; numberIterator <= 9; numberIterator += 1) {
       const numberElement = document.createElement('div');
-      numberElement.classList.add(NumScroll.CONSTANTS().CSS_CLASS.NUMBER);
+      numberElement.classList.add(CONSTANTS.CSS_CLASS.NUMBER);
       numberElement.textContent = numberIterator.toString();
 
       element.appendChild(numberElement);
@@ -161,7 +161,7 @@ class NumScroll {
   /**
    * Set the value of the numscroll.
    *
-   * @methodOf NumScroll
+   * @methodof NumScroll
    * @since 0.0.1
    * @public
    *
@@ -169,12 +169,16 @@ class NumScroll {
    */
   set value(number) {
     this._value = number;
+    const val = this._getNumberArray();
+
+    this._applyTransforms(val);
   }
 
   /**
    * Get the height of a single number of one of the groups.
+   * The transform amount is affected by this. value.
    *
-   * @methodOf NumScroll
+   * @methodof NumScroll
    * @since 0.0.1
    * @public
    *
@@ -185,13 +189,13 @@ class NumScroll {
   }
 
   set numberHeight(height) {
-    this._numberHeight = `${height}`;
+    this._numberHeight = height;
   }
 
   /**
    * The height of a single number of one of the groups.
    *
-   * @methodOf NumScroll
+   * @methodof NumScroll
    * @since 0.0.1
    * @public
    *
@@ -204,7 +208,7 @@ class NumScroll {
   /**
    * Create the dom needed for this instance.
    *
-   * @methodOf NumScroll
+   * @methodof NumScroll
    * @since 0.0.1
    * @private
    *
@@ -225,7 +229,7 @@ class NumScroll {
   /**
    * Calculate the transform value based on the index of the current number.
    *
-   * @methodOf NumScroll
+   * @methodof NumScroll
    * @since 0.0.1
    * @private
    *
@@ -243,7 +247,7 @@ class NumScroll {
   /**
    * Interpolate a number to a specific value.
    *
-   * @methodOf NumScroll
+   * @methodof NumScroll
    * @since 0.0.1
    * @public
    *
